@@ -8,9 +8,8 @@ TAG = $(VERSION)
 all: release
 
 release: build
-	$(DOCKER) tag $(REPO) $(REPO):$(TAG)
 	$(DOCKER) push $(REPO)
-	$(DOCKER) push quay.io/$(REPO)
+	# $(DOCKER) push quay.io/$(REPO)
 
 build:
 	$(DOCKER) build -t $(REPO):$(TAG) .
