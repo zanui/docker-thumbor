@@ -10,8 +10,6 @@ dependencies:
     - make build
 
 test:
-  pre:
-    - bundle install
   override:
     - make test
 
