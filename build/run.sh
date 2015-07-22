@@ -21,7 +21,7 @@ chmod +x /etc/service/thumbor/run
 # - JPEG support (libjpeg-dev)
 # - Compression lib for PIL (zlib1g-dev)
 # - GraphicsMagick Engine (python-pgmagick, python-pycurl)
-# - Optimizers (jpegoptim)
+# - Optimizers (jpegoptim, pngcrush)
 apt-get update -y
 apt-get install -y --no-install-recommends \
     build-essential \
@@ -33,7 +33,7 @@ apt-get install -y --no-install-recommends \
     libjpeg-dev \
     zlib1g-dev \
     python-pgmagick python-pycurl \
-    jpegoptim
+    jpegoptim pngcrush
 
 pip install \
     remotecv graphicsmagick-engine opencv-engine j2cli \

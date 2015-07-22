@@ -33,7 +33,7 @@ All [configuration](https://github.com/thumbor/thumbor/wiki/Configuration) optio
 - OpenCV support
 - JPEG support
 - GraphicsMagick Engine
-- Optimizers (jpegoptim)
+- Optimizers (jpegoptim, pngcrush)
 
 ## Available Tags
 
