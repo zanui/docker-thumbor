@@ -18,9 +18,9 @@
 
 require 'spec_helper'
 
-describe port(9000) do
-  it { should be_listening.with('tcp') }
-end
+# describe port(9000) do
+#   it { should be_listening.with('tcp') }
+# end
 
 image_urls = {
   jpeg: 'placehold.it/300x120/E8117F/ffffff.jpg',
