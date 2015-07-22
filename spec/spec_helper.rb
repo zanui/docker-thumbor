@@ -36,7 +36,7 @@ end
 # Configure RSpec/Serverspec backend
 set :os, family: :debian
 set :backend, :docker
-set :docker_image, Docker::Image.build_from_dir('.').id
+set :docker_image, Docker::Image.get(ENV['DOCKER_IMAGE']).id
 set :docker_container_create_options, {
   "AttachStdout" => true,
   "AttachStderr" => true,

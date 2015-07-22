@@ -8,13 +8,14 @@ dependencies:
     - make build
 
 test:
+  pre:
+    - bundle install
   override:
-    - docker run -d -p 9200:9200 circleci/elasticsearch; sleep 10
-    - curl --retry 10 --retry-delay 5 -v http://localhost:9200
+    - make test
 
 deployment:
   hub:
     branch: master
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push circleci/elasticsearch
+      - make release
