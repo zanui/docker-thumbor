@@ -22,7 +22,8 @@ require 'docker'
 require 'fastimage'
 
 # Configure docker through environment variables
-Docker.url = ENV['DOCKER_HOST']
+Docker.url = ENV['DOCKER_HOST'] if ENV.has_key?('DOCKER_HOST')
+
 if ENV.has_key?('DOCKER_TLS_VERIFY')
   cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
   Docker.options = {
