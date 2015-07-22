@@ -1,21 +1,39 @@
-# zanui/thumbor
+# zanui/docker-thumbor
 
-[![CircleCI](https://img.shields.io/circleci/project/zanui/docker-thumbor.svg)]()
-[![Docker Stars](https://img.shields.io/docker/stars/zanui/thumbor.svg)]()
+A full-featured docker image for the popular photo thumbnail service [thumbor](http://thumbor.org/).
+
+[![CircleCI](https://img.shields.io/circleci/project/zanui/docker-thumbor.svg)](https://circleci.com/gh/zanui/docker-thumbor)
+[![Docker Stars](https://img.shields.io/docker/stars/zanui/thumbor.svg)](https://registry.hub.docker.com/u/zanui/thumbor/star)
 [![Docker Pulls](https://img.shields.io/docker/pulls/zanui/thumbor.svg)]()
 
-thumbor is an open-source photo thumbnail service.
+## What is thumbor?
+
+[thumbor](http://thumbor.org/) is an open-source photo thumbnail service for smart on-demand image cropping, resizing and filters.
+
+* Homepage: http://thumbor.org/
+* Documentation: https://github.com/thumbor/thumbor/wiki
+* GitHub: https://github.com/thumbor/thumbor
 
 ## Installation and Usage
 
-    docker pull zanui/thumbor
     docker run -p 9000:9000 zanui/thumbor
+    open http://<docker-ip>:9000/unsafe/300x200/smart/s.glbimg.com/et/bb/f/original/2011/03/24/VN0JiwzmOw0b0lg.jpg
 
 To run with your own thumbor configuration:
 
     docker run -p 9000:9000 -e THUMBOR_ENGINE=thumbor.engines.graphicsmagick zanui/thumbor
 
-All [configuration](https://github.com/thumbor/thumbor/wiki/Configuration) options can be passed in as environment variables.
+All [configuration](https://github.com/thumbor/thumbor/wiki/Configuration) options can be passed in as environment variables. Variables need to be prefix with `THUMBOR`, e.g. `MAX_WIDTH` is passed in as `THUMBOR_MAX_WIDTH`.
+
+## Container Features
+
+- WebP support
+- GIFSICLE Engine support
+- WebM support
+- OpenCV support
+- JPEG support
+- GraphicsMagick Engine
+- Optimizers (jpegoptim)
 
 ## Available Tags
 
