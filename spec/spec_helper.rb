@@ -46,4 +46,5 @@ set :docker_container_create_options, {
 set :fail_fast, true
 
 # Configure Infrataster
-Infrataster::Server.define(:app, URI(Docker.url).host)
+host = ENV.has_key?('DOCKER_HOST') ? ENV.has_key?('DOCKER_HOST') : '127.0.0.1'
+Infrataster::Server.define(:app, host)
