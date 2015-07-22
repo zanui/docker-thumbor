@@ -6,11 +6,13 @@ machine:
 
 dependencies:
   override:
+    - bundle install
     - docker info
     - make build
 
 test:
   override:
+    - docker run -d -p 9000:9000 $(make repo):$(make version)
     - make test
 
 deployment:

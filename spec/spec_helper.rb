@@ -21,7 +21,7 @@ require 'infrataster/rspec'
 require 'docker'
 require 'fastimage'
 
-# Configure docker through environment variables
+# Configure docker-api through environment variables
 Docker.url = ENV['DOCKER_HOST'] if ENV.has_key?('DOCKER_HOST')
 
 if ENV.has_key?('DOCKER_TLS_VERIFY')
@@ -48,3 +48,11 @@ set :fail_fast, true
 # Configure Infrataster
 host = ENV.has_key?('DOCKER_HOST') ? ENV.has_key?('DOCKER_HOST') : '127.0.0.1'
 Infrataster::Server.define(:app, host)
+
+# Workaround for Circle CI
+if ENV.has_key?('CIRCLECI')
+  class Docker::Container
+    def remove(options={}); end
+    alias_method :delete, :remove
+  end
+end
