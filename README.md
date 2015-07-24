@@ -5,6 +5,7 @@ A full-featured docker image for the popular photo thumbnail service [thumbor](h
 [![CircleCI](https://img.shields.io/circleci/project/zanui/docker-thumbor.svg)](https://circleci.com/gh/zanui/docker-thumbor)
 [![Docker Stars](https://img.shields.io/docker/stars/zanui/thumbor.svg)](https://registry.hub.docker.com/u/zanui/thumbor/star)
 [![Docker Pulls](https://img.shields.io/docker/pulls/zanui/thumbor.svg)]()
+[![](https://badge.imagelayers.io/zanui/thumbor:latest.svg)](https://imagelayers.io/?images=zanui/thumbor:latest 'Get your own badge on imagelayers.io')
 
 ## What is thumbor?
 
