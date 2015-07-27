@@ -33,11 +33,16 @@ All [configuration](https://github.com/thumbor/thumbor/wiki/Configuration) optio
 - OpenCV support
 - JPEG support
 - GraphicsMagick Engine
-- Optimizers (jpegoptim, pngcrush)
+- Optimizers (jpegtran, jpegoptim, pngcrush, jpeg-recompress)
+- Thumbor Community Extensions
+  - [Thumbor AWS](https://github.com/thumbor-community/aws)
+- Thumbor Plugins
+  - JPEG-Recompress
 
 ## Available Tags
 
-* `latest`, `4.1.0`: Currently Thumbor 4.1.0
+* `latest`, `5.0.4`: Currently Thumbor 5.0.4
+* `4.1.0`: Thumbor 4.1.0
 
 ## Deployment
 
