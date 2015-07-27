@@ -1,5 +1,7 @@
 ################################### Logging ####################################
 
+THUMBOR_USE_SYSLOG = {{ THUMBOR_USE_SYSLOG|default(True) }}
+
 ## Logging configuration as json
 THUMBOR_LOG_CONFIG = {{ THUMBOR_LOG_CONFIG|default(None) }}
 
@@ -216,7 +218,7 @@ STORAGE_EXPIRATION_SECONDS = {{ THUMBOR_STORAGE_EXPIRATION_SECONDS|default(25920
 STORES_CRYPTO_KEY_FOR_EACH_IMAGE = {{ THUMBOR_STORES_CRYPTO_KEY_FOR_EACH_IMAGE|default(False) }}
 
 ## The root path where the File Storage will try to find images
-FILE_STORAGE_ROOT_PATH = '{{ THUMBOR_FILE_STORAGE_ROOT_PATH|default('/tmp/thumbor/storage') }}'
+FILE_STORAGE_ROOT_PATH = '{{ THUMBOR_FILE_STORAGE_ROOT_PATH|default('/data/thumbor/storage') }}'
 
 ################################################################################
 
@@ -290,9 +292,7 @@ REDIS_STORAGE_IGNORE_ERRORS = {{ THUMBOR_REDIS_STORAGE_IGNORE_ERRORS|default(Fal
 
 ## List of Memcache storage server hosts
 ## Defaults to: ['localhost:11211']
-#MEMCACHE_STORAGE_SERVERS = #    [
-#        'localhost:11211',
-#    ]
+MEMCACHE_STORAGE_SERVERS = {{ THUMBOR_OPTIMIZERS|default(['localhost:11211']) }}
 
 
 ################################################################################
@@ -329,8 +329,7 @@ META_CALLBACK_NAME = {{ THUMBOR_META_CALLBACK_NAME|default(None) }}
 ## List of detectors that thumbor should use to find faces and/or features. All
 ## of them must be full names of python modules (python must be able to import
 ## it)
-#DETECTORS = #    [
-#    ]
+DETECTORS = {{ THUMBOR_DETECTORS|default([]) }}
 
 
 ## The cascade file that opencv will use to detect faces
@@ -342,15 +341,25 @@ FACE_DETECTOR_CASCADE_FILE = '{{ THUMBOR_FACE_DETECTOR_CASCADE_FILE|default('haa
 ################################## Optimizers ##################################
 
 ## List of optimizers that thumbor will use to optimize images
-#OPTIMIZERS = #    [
-#    ]
-
+OPTIMIZERS = {{ THUMBOR_OPTIMIZERS|default([]) }}
 
 ## Path for the jpegtran binary
 JPEGTRAN_PATH = '{{ THUMBOR_JPEGTRAN_PATH|default('/usr/bin/jpegtran') }}'
 
+## Path for the jpeg-recompress binary
+JPEGRECOMPRESS_PATH = '{{ THUMBOR_JPEGTRAN_PATH|default('/usr/bin/jpeg-recompress') }}'
+
 ## Path for the ffmpeg binary used to generate gifv(h.264)
 FFMPEG_PATH = '{{ THUMBOR_FFMPEG_PATH|default('/usr/local/bin/ffmpeg') }}'
+
+## jpeg-recompress options
+JPEGRECOMPRESS_METHOD = '{{ THUMBOR_JPEGRECOMPRESS_METHOD|default('ssim') }}'
+JPEGRECOMPRESS_QUALITY_PRESET = '{{ THUMBOR_JPEGRECOMPRESS_QUALITY_PRESET|default('medium') }}'
+JPEGRECOMPRESS_QUALITY_MIN = {{ THUMBOR_JPEGRECOMPRESS_QUALITY_MIN|default(None) }}
+JPEGRECOMPRESS_QUALITY_MAX = {{ THUMBOR_JPEGRECOMPRESS_QUALITY_MAX|default(None) }}
+JPEGRECOMPRESS_LOOPS = {{ THUMBOR_JPEGRECOMPRESS_LOOPS|default(6) }}
+JPEGRECOMPRESS_ACCURATE = {{ THUMBOR_JPEGRECOMPRESS_ACCURATE|default(False) }}
+JPEGRECOMPRESS_SUBSAMPLE = {{ THUMBOR_JPEGRECOMPRESS_SUBSAMPLE|default(True) }}
 
 ################################################################################
 
@@ -400,7 +409,7 @@ RESULT_STORAGE_EXPIRATION_SECONDS = {{ THUMBOR_RESULT_STORAGE_EXPIRATION_SECONDS
 
 ## Path where the Result storage will store generated images
 ## Defaults to: /tmp/thumbor/result_storage
-RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = '{{ THUMBOR_RESULT_STORAGE_FILE_STORAGE_ROOT_PATH|default('/tmp/thumbor/result_storage') }}'
+RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = '{{ THUMBOR_RESULT_STORAGE_FILE_STORAGE_ROOT_PATH|default('/data/thumbor/result-storage') }}'
 
 ## Indicates whether unsafe requests should also be stored in the Result Storage
 ## Defaults to: False
@@ -412,19 +421,15 @@ RESULT_STORAGE_STORES_UNSAFE = {{ THUMBOR_RESULT_STORAGE_STORES_UNSAFE|default(F
 ############################ Queued Redis Detector #############################
 
 ## Server host for the queued redis detector
-## Defaults to: localhost
 REDIS_QUEUE_SERVER_HOST = '{{ THUMBOR_REDIS_QUEUE_SERVER_HOST|default('localhost') }}'
 
 ## Server port for the queued redis detector
-## Defaults to: 6379
 REDIS_QUEUE_SERVER_PORT = {{ THUMBOR_REDIS_QUEUE_SERVER_PORT|default(6379) }}
 
 ## Server database index for the queued redis detector
-## Defaults to: 0
-#REDIS_QUEUE_SERVER_DB = 0
+REDIS_QUEUE_SERVER_DB = {{ THUMBOR_REDIS_QUEUE_SERVER_DB|default(0) }}
 
 ## Server password for the queued redis detector
-## Defaults to: None
 REDIS_QUEUE_SERVER_PASSWORD = {{ THUMBOR_REDIS_QUEUE_SERVER_PASSWORD|default(None) }}
 
 ################################################################################
@@ -433,15 +438,12 @@ REDIS_QUEUE_SERVER_PASSWORD = {{ THUMBOR_REDIS_QUEUE_SERVER_PASSWORD|default(Non
 ############################# Queued SQS Detector ##############################
 
 ## AWS key id
-## Defaults to: None
 SQS_QUEUE_KEY_ID = {{ THUMBOR_SQS_QUEUE_KEY_ID|default(None) }}
 
 ## AWS key secret
-## Defaults to: None
 SQS_QUEUE_KEY_SECRET = {{ THUMBOR_SQS_QUEUE_KEY_SECRET|default(None) }}
 
 ## AWS SQS region
-## Defaults to: us-east-1
 SQS_QUEUE_REGION = '{{ THUMBOR_SQS_QUEUE_REGION|default('us-east-1') }}'
 
 ################################################################################
