@@ -7,15 +7,14 @@ MAINTAINER Zanui Engineering Team <engineering@zanui.com.au>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
+ENV THUMBOR_VERSION 5.0.4
 
-ENV THUMBOR_VERSION 4.1.3
-
-ADD build /opt/build
+COPY build /opt/build
 RUN chmod u+x /opt/build/run.sh
 RUN /opt/build/run.sh
 
-# Tell Docker that we are exposing the HTTP port
+#VOLUME /data/thumbor
+
 EXPOSE 9000
 
-# Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
