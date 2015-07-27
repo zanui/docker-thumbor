@@ -1,0 +1,31 @@
+thumbor:
+  image: zanui/thumbor:5.0.4
+  volumes_from:
+    - thumbordata
+  ports:
+    - "9000:9000"
+  environment:
+    - THUMBOR_SECURITY_KEY=SUPER_SECURE_KEY
+    - THUMBOR_QUALITY=100
+    - THUMBOR_MAX_AGE=2592000
+    - THUMBOR_MAX_AGE_TEMP_IMAGE=60
+    - THUMBOR_OPTIMIZERS=['thumbor.optimizers.jpegtran','thumbor_plugins.optimizers.jpegrecompress','thumbor.optimizers.gifv']
+    - THUMBOR_ENGINE=graphicsmagick_engine
+    - THUMBOR_UPLOAD_ENABLED=False
+    - THUMBOR_STORAGE=thumbor.storages.file_storage
+    - THUMBOR_RESULT_STORAGE_STORES_UNSAFE=False
+    - THUMBOR_STORES_CRYPTO_KEY_FOR_EACH_IMAGE=True
+    - THUMBOR_JPEGRECOMPRESS_ACCURATE=True
+    - THUMBOR_JPEGRECOMPRESS_METHOD=smallfry
+    - THUMBOR_JPEGRECOMPRESS_LOOPS=20
+    - THUMBOR_JPEGRECOMPRESS_QUALITY_PRESET=low
+    - THUMBOR_JPEGRECOMPRESS_QUALITY_MAX=85
+    - THUMBOR_JPEGRECOMPRESS_SUBSAMPLE=False
+
+thumbordata:
+  image: zanui/thumbor:5.0.4
+  volumes:
+    - /data/thumbor
+
+redis:
+  image: tutum/redis:latest
