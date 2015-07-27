@@ -8,17 +8,25 @@ TAG = $(VERSION)
 all: release
 
 release: build
-	$(DOCKER) push $(REPO)
+	@echo Pushing	 $(REPO):$(TAG)...
+	@$(DOCKER) push $(REPO)
 	# $(DOCKER) push quay.io/$(REPO)
 
 build:
-	$(DOCKER) build -t $(REPO):$(TAG) .
+	@echo Building $(REPO):$(TAG)...
+	@$(DOCKER) build -t $(REPO):$(TAG) .
 
 shell:
-	$(DOCKER) run -t -i $(REPO):$(TAG) /bin/bash
+	@echo Opening shell for $(REPO):$(TAG)
+	@$(DOCKER) run --rm -t -i $(REPO):$(TAG) /sbin/my_init -- bash -l
+
+shell_ports:
+	@echo Opening shell with ports for $(REPO):$(TAG)
+	@$(DOCKER) run --rm -t -i -p 9000:9000 $(REPO):$(TAG) /sbin/my_init -- bash -l
 
 test:
-	DOCKER_IMAGE=$(REPO):$(TAG) bundle exec rspec
+	@echo Testing $(REPO):$(TAG)...
+	@DOCKER_IMAGE=$(REPO):$(TAG) bundle exec rspec
 
 version:
 	@echo $(VERSION)
