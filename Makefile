@@ -9,16 +9,13 @@ all: build release
 
 release:
 	@echo Pushing $(REPO):$(TAG)...
-
+	@if [ -z "${CIRCLECI}" ]; then echo "This is not CircleCI"; exit 1; fi
 	@git tag $(TAG) && git push
 	@github-release release -u zanui -r docker-thumbor -t $(TAG) --draft
-
-    @echo Tagging $(REPO):$(TAG) with $(REPO):latest
+	@echo Tagging $(REPO):$(TAG) with $(REPO):latest
 	@$(DOCKER) tag -f $(REPO):$(TAG) $(REPO):latest
-
-    @echo Tagging $(REPO):$(TAG) with $(REPO):$(VERSION)
+	@echo Tagging $(REPO):$(TAG) with $(REPO):$(VERSION)
 	@$(DOCKER) tag -f $(REPO):$(TAG) $(REPO):$(VERSION)
-
 	@$(DOCKER) push $(REPO)
 	# $(DOCKER) push quay.io/$(REPO)
 
