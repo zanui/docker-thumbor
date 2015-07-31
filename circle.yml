@@ -6,6 +6,7 @@ machine:
 
 dependencies:
   override:
+    - go get github.com/aktau/github-release
     - bundle install
     - make build
     - docker images -a
