@@ -26,9 +26,6 @@ build:
 	@echo Building $(REPO):$(TAG)...
 	@$(DOCKER) build -t $(REPO):$(TAG) .
 
-tag_latest:
-
-
 shell:
 	@echo Opening shell for $(REPO):$(TAG)
 	@$(DOCKER) run --rm -t -i $(REPO):$(TAG) /sbin/my_init -- bash -l
