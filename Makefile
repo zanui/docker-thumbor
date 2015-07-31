@@ -5,16 +5,20 @@ VERSION = `grep THUMBOR_VERSION Dockerfile | cut -d' ' -f3`
 DOCKER = `which docker`
 TAG = $(VERSION)
 
-all: release
+all: build release
 
-release: build
-	@echo Pushing	 $(REPO):$(TAG)...
+release:
+	@echo Pushing $(REPO):$(TAG)...
 	@$(DOCKER) push $(REPO)
 	# $(DOCKER) push quay.io/$(REPO)
 
 build:
 	@echo Building $(REPO):$(TAG)...
 	@$(DOCKER) build -t $(REPO):$(TAG) .
+
+tag_latest:
+	@echo Tagging $(REPO):$(TAG) with $(REPO):latest
+	@$(DOCKER) tag -f $(REPO):$(TAG) $(REPO):latest
 
 shell:
 	@echo Opening shell for $(REPO):$(TAG)
