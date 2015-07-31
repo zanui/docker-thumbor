@@ -12,13 +12,13 @@ dependencies:
 
 test:
   override:
-    - docker run -d -p 9000:9000 $(make repo):$(make version)
+    - make run
     - make test
 
 deployment:
   hub:
     branch: master
     commands:
+      - if ! hash github-release 2>/dev/null; then go get github.com/aktau/github-release; fi
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - make tag_latest
       - make release
