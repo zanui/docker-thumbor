@@ -24,7 +24,7 @@ To run with your own thumbor configuration:
 
     docker run -p 9000:9000 -e THUMBOR_ENGINE=thumbor.engines.graphicsmagick zanui/thumbor
 
-All [configuration](https://github.com/thumbor/thumbor/wiki/Configuration) options can be passed in as environment variables. Variables need to be prefix with `THUMBOR`, e.g. `MAX_WIDTH` is passed in as `THUMBOR_MAX_WIDTH`.
+All [configuration](https://github.com/zanui/docker-thumbor/blob/master/build/templates/thumbor.conf.j2) options can be passed in as environment variables. Variables need to be prefix with `THUMBOR`, e.g. `MAX_WIDTH` is passed in as `THUMBOR_MAX_WIDTH`.
 
 ## Container Features
 
