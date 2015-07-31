@@ -5,20 +5,32 @@ VERSION = `grep THUMBOR_VERSION Dockerfile | cut -d' ' -f3`
 DOCKER = `which docker`
 TAG = $(VERSION)
 
-all: release
+all: build release
 
-release: build
-	$(DOCKER) push $(REPO)
+release:
+	@echo Pushing $(REPO):$(TAG)...
+	@$(DOCKER) push $(REPO)
 	# $(DOCKER) push quay.io/$(REPO)
 
 build:
-	$(DOCKER) build -t $(REPO):$(TAG) .
+	@echo Building $(REPO):$(TAG)...
+	@$(DOCKER) build -t $(REPO):$(TAG) .
+
+tag_latest:
+	@echo Tagging $(REPO):$(TAG) with $(REPO):latest
+	@$(DOCKER) tag -f $(REPO):$(TAG) $(REPO):latest
 
 shell:
-	$(DOCKER) run -t -i $(REPO):$(TAG) /bin/bash
+	@echo Opening shell for $(REPO):$(TAG)
+	@$(DOCKER) run --rm -t -i $(REPO):$(TAG) /sbin/my_init -- bash -l
+
+shell_ports:
+	@echo Opening shell with ports for $(REPO):$(TAG)
+	@$(DOCKER) run --rm -t -i -p 9000:9000 $(REPO):$(TAG) /sbin/my_init -- bash -l
 
 test:
-	DOCKER_IMAGE=$(REPO):$(TAG) bundle exec rspec
+	@echo Testing $(REPO):$(TAG)...
+	@DOCKER_IMAGE=$(REPO):$(TAG) bundle exec rspec
 
 version:
 	@echo $(VERSION)
